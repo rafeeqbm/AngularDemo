@@ -1,0 +1,31 @@
+<dx-html-editor style="border:1px solid #cccccc;width: 50%;"
+  #commentEditor
+  (onValueChanged)="editorChange($event)"
+  (keyup.enter)="emitNewComment($event)"
+>
+  <dxi-mention
+    #userMention
+    [dataSource]="userDataSource"
+    valueExpr="id"
+    displayExpr="name"
+    searchExpr="name"
+  ></dxi-mention>
+</dx-html-editor>
+
+<div style="width: 50%;">
+  <dx-list style="border:1px solid #cccccc; margin-top: 10px;"
+    [dataSource]="dataSource"
+    [hoverStateEnabled]="false"
+    [focusStateEnabled]="false"
+    height="50%"
+    paginate="true"
+    pageSize="10"
+    hoverStateEnabled="false"
+  >
+  <div *dxTemplate="let data of 'item'" class="comment-item">
+    <div [innerHTML]="data.text"></div>
+  </div>
+  </dx-list>
+</div>
+
+<router-outlet></router-outlet>
